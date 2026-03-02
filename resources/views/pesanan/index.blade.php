@@ -367,7 +367,13 @@
                             <div class="border-2 border-gray-200 rounded-xl p-3 text-center transition-all
                                         peer-checked:border-amber-500 hover:border-amber-300"
                                  id="btn-cash">
-                                <p class="text-lg mb-1">💵</p>
+                                <svg class="w-6 h-6 mx-auto mb-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" fill="#4CAF50" stroke="#2E7D32" stroke-width="1.5"/>
+                                    <circle cx="7" cy="12" r="2" fill="#FFF"/>
+                                    <rect x="11" y="8" width="8" height="2" rx="1" fill="#FFF"/>
+                                    <rect x="11" y="11" width="6" height="2" rx="1" fill="#FFF"/>
+                                    <rect x="11" y="14" width="4" height="2" rx="1" fill="#FFF"/>
+                                </svg>
                                 <p class="text-xs font-semibold text-gray-700">Cash</p>
                             </div>
                         </label>

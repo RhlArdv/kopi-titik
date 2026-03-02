@@ -264,7 +264,12 @@
                 {{-- Catatan --}}
                 <div id="cart-catatan-wrapper" class="hidden">
                     <p class="text-xs text-gray-400">
-                        📝 <span id="cart-catatan-display" class="italic"></span>
+                        <svg class="w-4 h-4 inline mr-1 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M9 12L11 14L15 10" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span id="cart-catatan-display" class="italic"></span>
                     </p>
                 </div>
 
@@ -282,8 +287,12 @@
                         onclick="submitPesanan()"
                         class="w-full py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold
                                rounded-2xl transition-all active:scale-95 text-sm shadow-lg
-                               shadow-amber-900/20">
-                    Kirim Pesanan 🚀
+                               shadow-amber-900/20 flex items-center justify-center gap-2">
+                    <span>Kirim Pesanan</span>
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </button>
 
                 <p class="text-xs text-center text-gray-400">
@@ -605,7 +614,7 @@
             errorEl.classList.remove('hidden');
         })
         .finally(() => {
-            btn.textContent = 'Kirim Pesanan 🚀';
+            btn.innerHTML = '<span>Kirim Pesanan</span><svg class="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 2L11 13" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             btn.disabled    = false;
         });
     }

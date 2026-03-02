@@ -190,9 +190,15 @@
                                    class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm
                                           focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400
                                           @error('stok') border-red-400 @enderror">
-                            <p class="text-xs text-gray-400 mt-1">
-                                💡 Untuk isi ulang stok harian, gunakan menu
-                                <a href="{{ route('stok.index') }}" class="text-amber-600 hover:underline">Stok Menu</a>.
+                            <p class="text-xs text-gray-400 mt-1 flex items-start gap-1">
+                                <svg class="w-4 h-4 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 18H15" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M10 22H14" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M12 2C7.5 2 5 5.5 5 8C5 10.5 7 11 7 14C7 14.5 7.5 15 8 15H16C16.5 15 17 14.5 17 14C17 11 19 10.5 19 8C19 5.5 16.5 2 12 2Z" fill="#FBBF24" stroke="#F59E0B" stroke-width="1.5"/>
+                                    <path d="M12 6V12M9.5 9H14.5" stroke="#FFF" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>Untuk isi ulang stok harian, gunakan menu
+                                <a href="{{ route('stok.index') }}" class="text-amber-600 hover:underline">Stok Menu</a>.</span>
                             </p>
                             @error('stok')
                                 <p class="text-xs text-red-500 mt-1">{{ $message }}</p>

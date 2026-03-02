@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriMenuController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
@@ -184,7 +185,22 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:edit_roles')
         ->name('roles.reset');
 
-        // -------------------------------------------------------
+    // -------------------------------------------------------
+    // LAPORAN
+    // -------------------------------------------------------
+    Route::get('/laporan', [LaporanController::class, 'index'])
+        ->middleware('permission:view_laporan')
+        ->name('laporan.index');
+
+    Route::get('/laporan/export-excel', [LaporanController::class, 'exportExcel'])
+        ->middleware('permission:view_laporan')
+        ->name('laporan.export-excel');
+
+    Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPdf'])
+        ->middleware('permission:view_laporan')
+        ->name('laporan.export-pdf');
+
+    // -------------------------------------------------------
     // ROLES
     // -------------------------------------------------------
     Route::get('/roles', [RoleController::class, 'index'])

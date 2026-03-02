@@ -61,10 +61,10 @@
             {{-- Brand --}}
             <div class="flex items-center justify-between px-5 h-[60px] border-b border-gray-100 flex-shrink-0">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 bg-indigo-50 flex items-center justify-center">
-                        <img src="{{ asset('assets/img/logo.png') }}" alt="Kopi Titik Logo" class="w-full h-full object-contain">
-                    </div>
-                    <span class="brand-font font-bold text-gray-900 text-[15px] tracking-tight">Kopi Titik V2</span>
+                    <img src="{{ asset('assets/img/logo.png') }}" 
+                        alt="Kopi Titik Logo" 
+                        class="h-10 w-auto flex-shrink-0 object-contain">
+                    <span class="brand-font font-bold text-gray-900 text-[15px] tracking-tight">Kopi Titik</span>
                 </div>
                 <button @click="sidebarOpen = false"
                         class="lg:hidden p-1 text-gray-400 hover:text-gray-600">

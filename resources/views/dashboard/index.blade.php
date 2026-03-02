@@ -118,7 +118,7 @@
             </span>
         </div>
         <p class="text-2xl font-bold text-gray-900 leading-none">
-            Rp {{ number_format($omzetHariIni / 1000, 0, ',', '.') }}k
+            Rp {{ number_format($omzetHariIni, 0, ',', '.') }}
         </p>
         <p class="text-[13px] text-gray-500 mt-1">Omzet Hari Ini</p>
     </div>

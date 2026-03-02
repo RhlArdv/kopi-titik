@@ -383,7 +383,14 @@
                             <div class="border-2 border-gray-200 rounded-xl p-3 text-center transition-all
                                         hover:border-amber-300"
                                  id="btn-qris">
-                                <p class="text-lg mb-1">📱</p>
+                                <svg class="w-6 h-6 mx-auto mb-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" fill="#4A90D9" stroke="#2563EB" stroke-width="1.5"/>
+                                    <rect x="7" y="7" width="3" height="3" fill="#FFF"/>
+                                    <rect x="14" y="7" width="3" height="3" fill="#FFF"/>
+                                    <rect x="7" y="14" width="3" height="3" fill="#FFF"/>
+                                    <rect x="10" y="10.5" width="4" height="3" fill="#FFF"/>
+                                    <rect x="14" y="14" width="3" height="3" fill="#FFF"/>
+                                </svg>
                                 <p class="text-xs font-semibold text-gray-700">QRIS</p>
                             </div>
                         </label>
@@ -395,14 +402,13 @@
                     <label class="block text-xs font-medium text-gray-500 mb-1.5">
                         Nominal Dibayar (Rp)
                     </label>
-                    <input type="number"
+                    <input type="text"
                            id="input-nominal"
-                           min="0"
-                           step="1000"
-                           placeholder="Masukkan nominal uang..."
-                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm
+                           inputmode="numeric"
+                           placeholder="0"
+                           class="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm font-mono
                                   focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
-                           oninput="hitungKembalian()">
+                           oninput="formatNominal(this); hitungKembalian()">
 
                     {{-- Preview kembalian --}}
                     <div id="preview-kembalian"
@@ -416,14 +422,29 @@
                     {{-- Warning kurang bayar --}}
                     <div id="warning-kurang"
                          class="hidden mt-2 bg-red-50 rounded-lg px-3 py-2 border border-red-100">
-                        <p class="text-xs text-red-600">⚠ Nominal kurang dari total tagihan</p>
+                        <p class="text-xs text-red-600 flex items-center gap-1">
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 9V13" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="17" r="1" fill="#DC2626"/>
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#DC2626" stroke-width="1.5"/>
+                            </svg>
+                            <span>Nominal kurang dari total tagihan</span>
+                        </p>
                     </div>
                 </div>
 
                 {{-- Info QRIS --}}
                 <div id="info-qris" class="hidden bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
-                    <p class="text-xs text-blue-700">
-                        📱 Pastikan pelanggan sudah transfer via QRIS sebelum konfirmasi.
+                    <p class="text-xs text-blue-700 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="18" height="18" rx="2" fill="#4A90D9" stroke="#2563EB" stroke-width="1.5"/>
+                            <rect x="7" y="7" width="3" height="3" fill="#FFF"/>
+                            <rect x="14" y="7" width="3" height="3" fill="#FFF"/>
+                            <rect x="7" y="14" width="3" height="3" fill="#FFF"/>
+                            <rect x="10" y="10.5" width="4" height="3" fill="#FFF"/>
+                            <rect x="14" y="14" width="3" height="3" fill="#FFF"/>
+                        </svg>
+                        <span>Pastikan pelanggan sudah transfer via QRIS sebelum konfirmasi.</span>
                     </p>
                 </div>
 
@@ -623,8 +644,25 @@
         }
     }
 
+    // Format input nominal dengan pemisah ribuan
+    function formatNominal(input) {
+        // Hapus karakter non-digit
+        let value = input.value.replace(/\D/g, '');
+        // Format dengan titik sebagai pemisah ribuan
+        if (value) {
+            input.value = Number(value).toLocaleString('id-ID');
+        } else {
+            input.value = '';
+        }
+    }
+
+    // Parse formatted nominal ke number
+    function parseNominal(formattedValue) {
+        return Number(formattedValue.replace(/\./g, '').replace(/,/g, '')) || 0;
+    }
+
     function hitungKembalian() {
-        const nominal    = parseFloat(document.getElementById('input-nominal').value) || 0;
+        const nominal    = parseNominal(document.getElementById('input-nominal').value);
         const kembalian  = nominal - totalTagihan;
         const previewEl  = document.getElementById('preview-kembalian');
         const warningEl  = document.getElementById('warning-kurang');
@@ -660,7 +698,7 @@
         const payload = { metode_pembayaran: metodeDipilih };
 
         if (metodeDipilih === 'cash') {
-            const nominal = parseFloat(document.getElementById('input-nominal').value);
+            const nominal = parseNominal(document.getElementById('input-nominal').value);
             if (!nominal || nominal < totalTagihan) {
                 errorEl.textContent = 'Nominal bayar tidak mencukupi.';
                 errorEl.classList.remove('hidden');

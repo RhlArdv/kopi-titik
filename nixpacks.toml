@@ -1,0 +1,12 @@
+[phases.setup]
+nixPkgs = ["php84", "php84Packages.composer", "nodejs_18"]
+
+[phases.build]
+cmds = [
+  "composer install --no-dev --optimize-autoloader",
+  "npm ci",
+  "npm run build"
+]
+
+[start]
+cmd = "php artisan config:clear && php artisan cache:clear && php artisan migrate --force && php -S 0.0.0.0:$PORT -t public"
